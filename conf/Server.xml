@@ -286,17 +286,17 @@
                                 <Rendition>
                                     <Name>Bypass</Name>
                                     <Video>bypass_video</Video>
-                                    <Audio>bypass_audio</Audio>
+                                    <Audio>aac</Audio>
                                 </Rendition>
                                 <Rendition>
                                     <Name>FHD</Name>
                                     <Video>video_1280</Video>
-                                    <Audio>bypass_audio</Audio>
+                                    <Audio>aac</Audio>
                                 </Rendition>
                                 <Rendition>
                                     <Name>HD</Name>
                                     <Video>video_720</Video>
-                                    <Audio>bypass_audio</Audio>
+                                    <Audio>aac</Audio>
                                 </Rendition>
                             </Playlist>
                             <!--LLHLS URL : https://domain/app/stream/llhls.m3u8 -->
@@ -306,12 +306,17 @@
                                 <Rendition>
                                     <Name>HD</Name>
                                     <Video>video_720</Video>
-                                    <Audio>bypass_audio</Audio>
+                                    <Audio>aac</Audio>
+                                </Rendition>
+                                <Rendition>
+                                    <Name>FHD</Name>
+                                    <Video>video_1280</Video>
+                                    <Audio>aac</Audio>
                                 </Rendition>
                             </Playlist>
                             <Encodes>
                                 <Audio>
-                                    <Name>bypass_audio</Name>
+                                    <Name>aac</Name>
                                     <Bypass>true</Bypass>
                                 </Audio>
                                 <Video>
@@ -327,20 +332,26 @@
                                 <Video>
                                     <Name>video_1280</Name>
                                     <Codec>h264</Codec>
-                                    <Bitrate>5024000</Bitrate>
-                                    <Framerate>30</Framerate>
                                     <Width>1920</Width>
                                     <Height>1280</Height>
-                                    <Preset>faster</Preset>
+                                    <Bitrate>5000000</Bitrate>
+                                    <Framerate>30</Framerate>
+                                    <KeyFrameInterval>30</KeyFrameInterval>
+                                    <Preset>fast</Preset>
+                                    <BFrames>0</BFrames>
+                                    <ThreadCount>4</ThreadCount>
                                 </Video>
                                 <Video>
                                     <Name>video_720</Name>
                                     <Codec>h264</Codec>
-                                    <Bitrate>2024000</Bitrate>
-                                    <Framerate>30</Framerate>
                                     <Width>1280</Width>
                                     <Height>720</Height>
-                                    <Preset>faster</Preset>
+                                    <Bitrate>2000000</Bitrate>
+                                    <Framerate>30</Framerate>
+                                    <KeyFrameInterval>30</KeyFrameInterval>
+                                    <Preset>fast</Preset>
+                                    <BFrames>0</BFrames>
+                                    <ThreadCount>4</ThreadCount>
                                 </Video>
                             </Encodes>
                         </OutputProfile>
@@ -386,7 +397,7 @@
                             <JitterBuffer>false</JitterBuffer>
                         </WebRTC>
                         <LLHLS>
-                            <ChunkDuration>0.2</ChunkDuration>
+                            <ChunkDuration>0.5</ChunkDuration>
                             <SegmentDuration>2</SegmentDuration>
                             <SegmentCount>10</SegmentCount>
                             <CrossDomains>
