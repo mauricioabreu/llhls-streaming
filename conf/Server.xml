@@ -272,45 +272,32 @@
                         <OutputProfile>
                           	<Name>bypass_stream</Name>
                             <OutputStreamName>${OriginStreamName}</OutputStreamName>
-                            <!--LLHLS URL : https://domain/app/stream/abr.m3u8 -->
                             <Playlist>
-                                <Name>For LLHLS</Name>
-                                <FileName>abr</FileName>
-                                <Options> <!-- Optinal -->
-                                    <!--
-                                    Automatically switch rendition in WebRTC ABR
-                                    [Default] : true
-                                    -->
-                                    <WebRtcAutoAbr>true</WebRtcAutoAbr>
-                                </Options>
-                                <Rendition>
-                                    <Name>Bypass</Name>
-                                    <Video>bypass_video</Video>
-                                    <Audio>aac</Audio>
-                                </Rendition>
-                                <Rendition>
-                                    <Name>FHD</Name>
-                                    <Video>video_1280</Video>
-                                    <Audio>aac</Audio>
-                                </Rendition>
-                                <Rendition>
-                                    <Name>HD</Name>
-                                    <Video>video_720</Video>
-                                    <Audio>aac</Audio>
-                                </Rendition>
-                            </Playlist>
-                            <!--LLHLS URL : https://domain/app/stream/llhls.m3u8 -->
-                            <Playlist>
-                                <Name>Change Default</Name>
+                                <Name>LLHLS</Name>
                                 <FileName>llhls</FileName>
                                 <Rendition>
-                                    <Name>HD</Name>
-                                    <Video>video_720</Video>
+                                    <Name>360p</Name>
+                                    <Video>video_360p</Video>
                                     <Audio>aac</Audio>
                                 </Rendition>
                                 <Rendition>
-                                    <Name>FHD</Name>
-                                    <Video>video_1280</Video>
+                                    <Name>432p</Name>
+                                    <Video>video_432p</Video>
+                                    <Audio>aac</Audio>
+                                </Rendition>
+                                <Rendition>
+                                    <Name>720p_low</Name>
+                                    <Video>video_720p_low</Video>
+                                    <Audio>aac</Audio>
+                                </Rendition>
+                                <Rendition>
+                                    <Name>720p_high</Name>
+                                    <Video>video_720p_high</Video>
+                                    <Audio>aac</Audio>
+                                </Rendition>
+                                <Rendition>
+                                    <Name>1080p</Name>
+                                    <Video>video_1080p</Video>
                                     <Audio>aac</Audio>
                                 </Rendition>
                             </Playlist>
@@ -330,11 +317,11 @@
                                     <Channel>2</Channel>
                                 </Audio>
                                 <Video>
-                                    <Name>video_1280</Name>
+                                    <Name>video_360p</Name>
                                     <Codec>h264</Codec>
-                                    <Width>1920</Width>
-                                    <Height>1280</Height>
-                                    <Bitrate>5000000</Bitrate>
+                                    <Width>630</Width>
+                                    <Height>360</Height>
+                                    <Bitrate>1300000</Bitrate>
                                     <Framerate>30</Framerate>
                                     <KeyFrameInterval>30</KeyFrameInterval>
                                     <Preset>fast</Preset>
@@ -342,11 +329,47 @@
                                     <ThreadCount>4</ThreadCount>
                                 </Video>
                                 <Video>
-                                    <Name>video_720</Name>
+                                    <Name>video_432p</Name>
+                                    <Codec>h264</Codec>
+                                    <Width>768</Width>
+                                    <Height>432</Height>
+                                    <Bitrate>2000000</Bitrate>
+                                    <Framerate>30</Framerate>
+                                    <KeyFrameInterval>30</KeyFrameInterval>
+                                    <Preset>fast</Preset>
+                                    <BFrames>0</BFrames>
+                                    <ThreadCount>4</ThreadCount>
+                                </Video>
+                                <Video>
+                                    <Name>video_720p_low</Name>
                                     <Codec>h264</Codec>
                                     <Width>1280</Width>
                                     <Height>720</Height>
-                                    <Bitrate>2000000</Bitrate>
+                                    <Bitrate>3200000</Bitrate>
+                                    <Framerate>30</Framerate>
+                                    <KeyFrameInterval>30</KeyFrameInterval>
+                                    <Preset>fast</Preset>
+                                    <BFrames>0</BFrames>
+                                    <ThreadCount>4</ThreadCount>
+                                </Video>
+                                <Video>
+                                    <Name>video_720p_high</Name>
+                                    <Codec>h264</Codec>
+                                    <Width>1280</Width>
+                                    <Height>720</Height>
+                                    <Bitrate>4800000</Bitrate>
+                                    <Framerate>30</Framerate>
+                                    <KeyFrameInterval>30</KeyFrameInterval>
+                                    <Preset>fast</Preset>
+                                    <BFrames>0</BFrames>
+                                    <ThreadCount>4</ThreadCount>
+                                </Video>
+                                <Video>
+                                    <Name>video_1080p</Name>
+                                    <Codec>h264</Codec>
+                                    <Width>1920</Width>
+                                    <Height>1080</Height>
+                                    <Bitrate>7000000</Bitrate>
                                     <Framerate>30</Framerate>
                                     <KeyFrameInterval>30</KeyFrameInterval>
                                     <Preset>fast</Preset>
