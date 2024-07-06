@@ -59,7 +59,7 @@
                 <WorkerCount>1</WorkerCount>
             </RTMP>
             <SRT>
-                <Port>9999/udp</Port>
+                <Port>9999</Port>
                 <WorkerCount>1</WorkerCount>
             </SRT>
             <MPEGTS>
