@@ -8,8 +8,16 @@ just run
 
 ## Ingest
 
+### RTMP
+
 ```
-just ingest
+just ingest-rtmp
+```
+
+### SRT
+
+```
+just ingest-srt
 ```
 
 ## Play
