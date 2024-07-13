@@ -150,9 +150,7 @@
         <API>
             <AccessToken>llhls-token</AccessToken>
             <CrossDomains>
-                <Url>*.airensoft.com</Url>
-                <Url>http://*.sub-domain.airensoft.com</Url>
-                <Url>http?://airensoft.*</Url>
+                <Url>*</Url>
             </CrossDomains>
         </API>
     </Managers>
