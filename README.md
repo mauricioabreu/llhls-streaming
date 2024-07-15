@@ -8,12 +8,6 @@ just run
 
 ## Ingest
 
-### RTMP
-
-```
-just ingest-rtmp
-```
-
 ### SRT
 
 ```
