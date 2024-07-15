@@ -10,7 +10,7 @@ services:
       - "10000-10004:10000-10004/udp" # WebRTC Candidate
     restart: always
     volumes:
-      - ./conf:/opt/ovenmediaengine/bin/origin_conf
+      - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
     command: /opt/ovenmediaengine/bin/OvenMediaEngine -c origin_conf
 
   edge:
@@ -21,5 +21,5 @@ services:
       - "10005-10009:10005-10009/udp" # WebRTC Candidate
     restart: always
     volumes:
-      - ./conf:/opt/ovenmediaengine/bin/edge_conf
+      - ./edge_conf:/opt/ovenmediaengine/bin/edge_conf
     command: /opt/ovenmediaengine/bin/OvenMediaEngine -c edge_conf
