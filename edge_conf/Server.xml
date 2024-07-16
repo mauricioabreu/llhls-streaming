@@ -133,38 +133,11 @@
 					<NoInputFailoverTimeout>3000</NoInputFailoverTimeout>
 					<UnusedStreamDeletionTimeout>60000</UnusedStreamDeletionTimeout>
 				</Properties>
-				<!--
-					<Origin>
-					<Location>/app/stream</Location>
-					<Pass>
-						<Scheme>ovt</Scheme>
-						<Urls>
-							<Url>origin.com:9000/app/stream_720p</Url>
-						</Urls>
-					</Pass>
-				</Origin>
 				<Origin>
-					<Location>/app/</Location>
+					<Location>/edge_app/</Location>
 					<Pass>
-						<Scheme>ovt</Scheme>
-						<Urls>
-							<Url>origin.com:9000/app/</Url>
-						</Urls>
-					</Pass>
-				</Origin>
-				-->
-				<Origin>
-					<Location>/</Location>
-					<Pass>
-						<Scheme>ovt</Scheme>
-						<Urls>
-							<Url>${env:DEFAULT_ORIGIN_SERVER:}:${env:DEFAULT_ORIGIN_PORT:9000}/</Url>
-						</Urls>
-						<!--
-							Whether to pass the query string to the origin server in the URL the user requested to play (used by some RTSP servers)
-							default : true
-						-->
-						<ForwardQueryParams>true</ForwardQueryParams>
+						<Scheme>OVT</Scheme>
+						<Urls><Url>origin:9000/app/</Url></Urls>
 					</Pass>
 				</Origin>
 			</Origins>

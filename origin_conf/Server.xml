@@ -212,35 +212,6 @@
             </AdmissionWebhooks>
             -->
 
-            <!-- <Origins>
-                <Properties>
-                    <NoInputFailoverTimeout>3000</NoInputFailoverTimeout>
-                    <UnusedStreamDeletionTimeout>60000</UnusedStreamDeletionTimeout>
-                </Properties>
-                <Origin>
-                    <Location>/app/stream</Location>
-                    <Pass>
-                        <Scheme>ovt</Scheme>
-                        <Urls><Url>origin.com:9000/app/stream_720p</Url></Urls>
-                    </Pass>
-                    <ForwardQueryParams>false</ForwardQueryParams>
-                </Origin>
-                <Origin>
-                    <Location>/app/</Location>
-                    <Pass>
-                        <Scheme>ovt</Scheme>
-                        <Urls><Url>origin.com:9000/app/</Url></Urls>
-                    </Pass>
-                </Origin>
-                <Origin>
-                    <Location>/edge/</Location>
-                    <Pass>
-                        <Scheme>ovt</Scheme>
-                        <Urls><Url>origin.com:9000/app/</Url></Urls>
-                    </Pass>
-                </Origin>
-            </Origins> -->
-
             <!-- Settings for applications -->
             <Applications>
                 <Application>
