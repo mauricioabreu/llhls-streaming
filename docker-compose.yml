@@ -23,3 +23,11 @@ services:
     volumes:
       - ./edge_conf:/opt/ovenmediaengine/bin/edge_conf
     command: /opt/ovenmediaengine/bin/OvenMediaEngine -c edge_conf
+
+  nginx:
+    image: openresty/openresty
+    ports:
+      - "8080:80/tcp"
+    restart: always
+    volumes:
+      - ./nginx_conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
