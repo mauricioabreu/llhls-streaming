@@ -373,6 +373,7 @@
                             <JitterBuffer>false</JitterBuffer>
                         </WebRTC>
                         <LLHLS>
+                            <OriginMode>true</OriginMode>
                             <ChunkDuration>0.5</ChunkDuration>
                             <SegmentDuration>2</SegmentDuration>
                             <SegmentCount>10</SegmentCount>
