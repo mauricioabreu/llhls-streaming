@@ -1,6 +1,9 @@
 run:
   docker compose up
 
+stop:
+  docker compose down
+
 ingest-srt:
   ffmpeg -re -f lavfi -i testsrc=size=1280x720:rate=30 \
     -vf "drawtext=fontsize=30:fontcolor=white:x=7:y=7:text='Time\: %{localtime\:%X}',format=yuv420p" \
