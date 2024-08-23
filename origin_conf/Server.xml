@@ -374,6 +374,13 @@
                         </WebRTC>
                         <LLHLS>
                             <OriginMode>true</OriginMode>
+                            <CacheControl>
+								<MasterPlaylistMaxAge>10</MasterPlaylistMaxAge>
+								<ChunklistMaxAge>5</ChunklistMaxAge>
+								<ChunklistWithDirectivesMaxAge>10</ChunklistWithDirectivesMaxAge>
+								<SegmentMaxAge>120</SegmentMaxAge>
+								<PartialSegmentMaxAge>120</PartialSegmentMaxAge>
+							</CacheControl>
                             <ChunkDuration>0.5</ChunkDuration>
                             <SegmentDuration>2</SegmentDuration>
                             <SegmentCount>10</SegmentCount>
