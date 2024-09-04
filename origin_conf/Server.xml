@@ -215,7 +215,7 @@
             <!-- Settings for applications -->
             <Applications>
                 <Application>
-                    <Name>app</Name>
+                    <Name>ll</Name>
                     <!-- Application type (live/vod) -->
                     <Type>live</Type>
                     <OutputProfiles>
@@ -228,6 +228,9 @@
                             <Playlist>
                                 <Name>LLHLS</Name>
                                 <FileName>llhls</FileName>
+                                <Options>
+                                    <HLSChunklistPathDepth>0</HLSChunklistPathDepth>
+                                </Options>
                                 <Rendition>
                                     <Name>360p</Name>
                                     <Video>video_360p</Video>
