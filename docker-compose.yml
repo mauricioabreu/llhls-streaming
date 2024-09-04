@@ -1,6 +1,6 @@
 services:
   origin:
-    image: airensoft/ovenmediaengine:0.16.8 # temporary (OVT bug)
+    image: airensoft/ovenmediaengine:0.16.8
     ports:
       - "9000:9000/tcp" # OVT(Origin)
       - "1935:1935/tcp" # RTMP Provider
@@ -14,7 +14,7 @@ services:
     command: /opt/ovenmediaengine/bin/OvenMediaEngine -c origin_conf
 
   edge:
-    image: airensoft/ovenmediaengine:0.16.8 # temporary (OVT bug)
+    image: airensoft/ovenmediaengine:0.16.8
     ports:
       - "4333:3333/tcp" # WebRTC Signaling / LLHLS
       - "3479:3479/tcp" # WebRTC TURN
