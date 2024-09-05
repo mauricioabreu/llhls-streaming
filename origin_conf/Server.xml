@@ -227,7 +227,7 @@
                             <OutputStreamName>${OriginStreamName}</OutputStreamName>
                             <Playlist>
                                 <Name>LLHLS</Name>
-                                <FileName>llhls</FileName>
+                                <FileName>playlist</FileName>
                                 <Options>
                                     <HLSChunklistPathDepth>0</HLSChunklistPathDepth>
                                 </Options>
@@ -380,7 +380,7 @@
                             <CacheControl>
 								<MasterPlaylistMaxAge>10</MasterPlaylistMaxAge>
 								<ChunklistMaxAge>5</ChunklistMaxAge>
-								<ChunklistWithDirectivesMaxAge>10</ChunklistWithDirectivesMaxAge>
+								<ChunklistWithDirectivesMaxAge>-1</ChunklistWithDirectivesMaxAge>
 								<SegmentMaxAge>120</SegmentMaxAge>
 								<PartialSegmentMaxAge>120</PartialSegmentMaxAge>
 							</CacheControl>

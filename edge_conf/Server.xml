@@ -134,10 +134,13 @@
 					<UnusedStreamDeletionTimeout>60000</UnusedStreamDeletionTimeout>
 				</Properties>
 				<Origin>
-					<Location>/edge_app/</Location>
+					<Location>/edge_ll/</Location>
 					<Pass>
 						<Scheme>OVT</Scheme>
-						<Urls><Url>origin:9000/app/</Url></Urls>
+						<Urls>
+							<Url>ome-low-latency-origin-1:9000/ll/</Url>
+							<Url>ome-low-latency-origin-2:9000/ll/</Url>
+						</Urls>
 					</Pass>
 				</Origin>
 			</Origins>
@@ -196,6 +199,7 @@
 							<JitterBuffer>false</JitterBuffer>
 						</WebRTC>
 						<LLHLS>
+							<OriginMode>true</OriginMode>
 							<ChunkDuration>0.5</ChunkDuration>
 							<SegmentDuration>6</SegmentDuration>
 							<SegmentCount>10</SegmentCount>
