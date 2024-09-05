@@ -379,8 +379,8 @@
                             <OriginMode>true</OriginMode>
                             <CacheControl>
 								<MasterPlaylistMaxAge>10</MasterPlaylistMaxAge>
-								<ChunklistMaxAge>5</ChunklistMaxAge>
-								<ChunklistWithDirectivesMaxAge>-1</ChunklistWithDirectivesMaxAge>
+								<ChunklistMaxAge>1</ChunklistMaxAge>
+								<ChunklistWithDirectivesMaxAge>5</ChunklistWithDirectivesMaxAge>
 								<SegmentMaxAge>120</SegmentMaxAge>
 								<PartialSegmentMaxAge>120</PartialSegmentMaxAge>
 							</CacheControl>
