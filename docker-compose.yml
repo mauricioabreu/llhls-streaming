@@ -2,9 +2,9 @@ services:
   origin:
     image: airensoft/ovenmediaengine:0.16.8
     ports:
-      - "1935/tcp" # RTMP Provider
-      - "9999/udp" # SRT
-      - "8081" # API
+      - "1934-1935:1935/tcp" # RTMP Provider
+      - "9998-9999:9999/udp" # SRT
+      - "8081-8082:8081" # API
     restart: always
     volumes:
       - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
