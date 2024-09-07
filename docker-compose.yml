@@ -2,9 +2,9 @@ services:
   origin:
     image: airensoft/ovenmediaengine:0.16.8
     ports:
-      - "1934-1935:1935/tcp" # RTMP Provider
-      - "9998-9999:9999/udp" # SRT
-      - "8081-8082:8081" # API
+      - "1935/tcp" # RTMP Provider
+      - "9999/udp" # SRT
+      - "8081" # API
     restart: always
     volumes:
       - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
@@ -13,17 +13,23 @@ services:
       replicas: 2
       mode: vip
 
-  edge:
-    image: airensoft/ovenmediaengine:0.16.8
-    ports:
-      - "4333-4335:3333/tcp" # WebRTC Signaling / LLHLS
+  mapper:
+    build:
+      context: ./mapper
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - REDIS_ADDR=redis:6379
+      - API_HOSTS=http://llhls-streaming-origin-1:8081,http://llhls-streaming-origin-2:8081
+      - API_TOKEN=llhls-token
+      - UPDATE_INTERVAL=5
+      - STREAM_TTL=10
+
+  redis:
+    image: redis:7.4.0-alpine
     restart: always
     volumes:
-      - ./edge_conf:/opt/ovenmediaengine/bin/edge_conf
-    command: /opt/ovenmediaengine/bin/OvenMediaEngine -c edge_conf
-    deploy:
-      replicas: 3
-      mode: vip
+      - redis_data:/data
 
   nginx:
     image: openresty/openresty
@@ -32,7 +38,8 @@ services:
     restart: always
     volumes:
       - ./nginx_conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+    depends_on:
+      - mapper
 
-  mapper:
-    image: golang:1.23
-
+volumes:
+  redis_data:

@@ -34,7 +34,7 @@ func New(cfg *config.Config, storer *store.RedisStore) *Client {
 func (c *Client) ListStreams(hosts []string) (map[string][]string, error) {
 	streams := make(map[string][]string)
 
-	for _, host := range c.cfg.Hosts {
+	for _, host := range hosts {
 		url := fmt.Sprintf("%s/v1/vhosts/default/apps/ll/streams", host)
 		req, err := http.NewRequest("GET", url, nil)
 		if err != nil {

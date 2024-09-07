@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"log"
 	"mapper/api"
 	"mapper/config"
+	"mapper/log"
 	"mapper/store"
 	"time"
 
@@ -28,7 +28,7 @@ func UpdateStreams(lc fx.Lifecycle, apiClient *api.Client, store *store.RedisSto
 				for {
 					select {
 					case <-ticker.C:
-						streams, err := apiClient.ListStreams(config.Hosts)
+						streams, err := apiClient.ListStreams(config.APIHosts)
 						if err != nil {
 							logger.Errorw("Error listing streams", "error", err)
 							continue
