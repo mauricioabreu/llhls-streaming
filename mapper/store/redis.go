@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"mapper/config"
+	"net"
+	"net/url"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -48,10 +50,15 @@ func NewRedisStore(cfg *config.Config) (*RedisStore, error) {
 
 func (s *RedisStore) UpdateStream(ctx context.Context, stream, host string, ttl int) error {
 	key := fmt.Sprintf("streams:%s", stream)
-	err := updateStreamScript.Run(ctx, s.client, []string{key}, host, ttl).Err()
+	host, err := hostFromURL(host)
 	if err != nil {
+		return fmt.Errorf("failed to get host from URL: %w", err)
+	}
+
+	if updateStreamScript.Run(ctx, s.client, []string{key}, host, ttl).Err(); err != nil {
 		return fmt.Errorf("failed to execute update stream script for %s: %w", stream, err)
 	}
+
 	return nil
 }
 
@@ -70,4 +77,15 @@ func (s *RedisStore) UpdateStreams(ctx context.Context, streams map[string][]str
 func (s *RedisStore) GetStream(ctx context.Context, term string) (string, error) {
 	key := fmt.Sprintf("streams:%s", term)
 	return s.client.Get(ctx, key).Result()
+}
+
+func hostFromURL(u string) (string, error) {
+	parsedURL, err := url.Parse(u)
+	if err != nil {
+		return "", fmt.Errorf("failed to parse URL: %w", err)
+	}
+
+	host, _, err := net.SplitHostPort(parsedURL.Host)
+
+	return host, err
 }
