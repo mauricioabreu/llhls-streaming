@@ -13,17 +13,33 @@ services:
       replicas: 2
       mode: vip
 
-  mapper:
+  updater:
     build:
       context: ./mapper
       dockerfile: Dockerfile
-    restart: always
     environment:
       - REDIS_ADDR=redis:6379
       - API_HOSTS=http://llhls-streaming-origin-1:8081,http://llhls-streaming-origin-2:8081
       - API_TOKEN=llhls-token
       - UPDATE_INTERVAL=5
       - STREAM_TTL=10
+    depends_on:
+      - origin
+      - redis
+    command: ./mapper updater
+
+  api:
+    build:
+      context: ./mapper
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "9090:8080"
+    depends_on:
+      - redis
+    command: ./mapper api
 
   redis:
     image: redis:7.4.0-alpine
@@ -41,7 +57,8 @@ services:
     volumes:
       - ./nginx_conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
     depends_on:
-      - mapper
+      - updater
+      - api
 
 volumes:
   redis_data:

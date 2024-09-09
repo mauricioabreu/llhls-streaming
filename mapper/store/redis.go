@@ -66,3 +66,8 @@ func (s *RedisStore) UpdateStreams(ctx context.Context, streams map[string][]str
 
 	return nil
 }
+
+func (s *RedisStore) GetStream(ctx context.Context, term string) (string, error) {
+	key := fmt.Sprintf("streams:%s", term)
+	return s.client.Get(ctx, key).Result()
+}
