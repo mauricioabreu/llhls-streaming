@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"mapper/api"
 	"mapper/config"
 	"mapper/log"
+	"mapper/originapi"
 	"mapper/store"
 	"time"
 
@@ -12,7 +12,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func UpdateStreams(lc fx.Lifecycle, apiClient *api.Client, store *store.RedisStore, config *config.Config, logger *zap.SugaredLogger) {
+func UpdateStreams(lc fx.Lifecycle, apiClient *originapi.Client, store *store.RedisStore, config *config.Config, logger *zap.SugaredLogger) {
 	var cancelFunc context.CancelFunc
 	var ctx context.Context
 
@@ -64,7 +64,7 @@ func main() {
 		fx.Provide(
 			config.New,
 			store.NewRedisStore,
-			api.New,
+			originapi.New,
 			log.New,
 		),
 		fx.Invoke(UpdateStreams),

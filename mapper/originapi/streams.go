@@ -1,4 +1,4 @@
-package api
+package originapi
 
 import (
 	"encoding/base64"
