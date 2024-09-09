@@ -30,7 +30,9 @@ var apiCmd = &cobra.Command{
 
 func runAPI(ginAPI *api.API, logger *zap.SugaredLogger) {
 	router := ginAPI.SetupRouter()
+
 	logger.Info("Starting API server on :8080")
+
 	if err := router.Run(":8080"); err != nil {
 		logger.Fatalw("Failed to start API server", "error", err)
 	}

@@ -13,9 +13,9 @@ type API struct {
 	logger *zap.SugaredLogger
 }
 
-func New(store *store.RedisStore, logger *zap.SugaredLogger) *API {
+func New(redis *store.RedisStore, logger *zap.SugaredLogger) *API {
 	return &API{
-		store:  store,
+		store:  redis,
 		logger: logger,
 	}
 }
@@ -32,15 +32,18 @@ func (a *API) SetupRouter() *gin.Engine {
 
 func (a *API) GetStream(c *gin.Context) {
 	term := c.Param("stream")
+
 	host, err := a.store.GetStream(c.Request.Context(), term)
-	if err != nil {
-		a.logger.Errorw("failed to get host", "error", err, "stream", term)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get host"})
+	if err == store.ErrNotFound {
+		c.JSON(http.StatusNotFound, gin.H{"error": "stream not found"})
+
 		return
 	}
 
-	if host == "" {
-		c.JSON(http.StatusNotFound, gin.H{"error": "stream not found"})
+	if err != nil {
+		a.logger.Errorw("failed to get host", "error", err, "stream", term)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get host"})
+
 		return
 	}
 

@@ -7,5 +7,6 @@ func New() (*zap.SugaredLogger, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return logger.Sugar(), nil
 }

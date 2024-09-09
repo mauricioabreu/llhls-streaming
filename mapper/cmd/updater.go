@@ -30,8 +30,9 @@ var updaterCmd = &cobra.Command{
 	},
 }
 
-func runUpdater(lc fx.Lifecycle, apiClient *originapi.Client, store *store.RedisStore, config *config.Config, logger *zap.SugaredLogger) {
+func runUpdater(lc fx.Lifecycle, apiClient *originapi.Client, redis *store.RedisStore, cfg *config.Config, logger *zap.SugaredLogger) {
 	var cancelFunc context.CancelFunc
+
 	var ctx context.Context
 
 	lc.Append(fx.Hook{
@@ -40,13 +41,13 @@ func runUpdater(lc fx.Lifecycle, apiClient *originapi.Client, store *store.Redis
 			ctx, cancelFunc = context.WithCancel(context.Background())
 
 			go func() {
-				ticker := time.NewTicker(time.Duration(config.UpdateInterval) * time.Second)
+				ticker := time.NewTicker(time.Duration(cfg.UpdateInterval) * time.Second)
 				defer ticker.Stop()
 
 				for {
 					select {
 					case <-ticker.C:
-						streams, err := apiClient.ListStreams(config.APIHosts)
+						streams, err := apiClient.ListStreams(cfg.APIHosts)
 						if err != nil {
 							logger.Errorw("Error listing streams", "error", err)
 							continue
@@ -54,7 +55,7 @@ func runUpdater(lc fx.Lifecycle, apiClient *originapi.Client, store *store.Redis
 
 						logger.Infow("Updating streams in Redis", "streams", streams)
 
-						err = store.UpdateStreams(ctx, streams, config.StreamTTL)
+						err = redis.UpdateStreams(ctx, streams, cfg.StreamTTL)
 						if err != nil {
 							logger.Errorw("Error updating streams in Redis", "error", err)
 						}

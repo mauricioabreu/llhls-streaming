@@ -50,12 +50,13 @@ func NewRedisStore(cfg *config.Config) (*RedisStore, error) {
 
 func (s *RedisStore) UpdateStream(ctx context.Context, stream, host string, ttl int) error {
 	key := fmt.Sprintf("streams:%s", stream)
+
 	host, err := hostFromURL(host)
 	if err != nil {
 		return fmt.Errorf("failed to get host from URL: %w", err)
 	}
 
-	if updateStreamScript.Run(ctx, s.client, []string{key}, host, ttl).Err(); err != nil {
+	if err := updateStreamScript.Run(ctx, s.client, []string{key}, host, ttl).Err(); err != nil {
 		return fmt.Errorf("failed to execute update stream script for %s: %w", stream, err)
 	}
 
@@ -76,7 +77,17 @@ func (s *RedisStore) UpdateStreams(ctx context.Context, streams map[string][]str
 
 func (s *RedisStore) GetStream(ctx context.Context, term string) (string, error) {
 	key := fmt.Sprintf("streams:%s", term)
-	return s.client.Get(ctx, key).Result()
+
+	host, err := s.client.Get(ctx, key).Result()
+	if err == redis.Nil {
+		return "", ErrNotFound
+	}
+
+	if err != nil {
+		return "", fmt.Errorf("failed to get stream for %s: %w", term, err)
+	}
+
+	return host, nil
 }
 
 func hostFromURL(u string) (string, error) {

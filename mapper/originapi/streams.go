@@ -36,7 +36,8 @@ func (c *Client) ListStreams(hosts []string) (map[string][]string, error) {
 
 	for _, host := range hosts {
 		url := fmt.Sprintf("%s/v1/vhosts/default/apps/ll/streams", host)
-		req, err := http.NewRequest("GET", url, nil)
+
+		req, err := http.NewRequest("GET", url, http.NoBody)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create request for host %s: %w", host, err)
 		}
@@ -48,7 +49,6 @@ func (c *Client) ListStreams(hosts []string) (map[string][]string, error) {
 		if err != nil {
 			return nil, fmt.Errorf("failed to perform request for host %s: %w", host, err)
 		}
-		defer resp.Body.Close()
 
 		if resp.StatusCode != http.StatusOK {
 			fmt.Printf("failed to get streams from host %s: %s\n", host, resp.Status)
@@ -66,6 +66,8 @@ func (c *Client) ListStreams(hosts []string) (map[string][]string, error) {
 		}
 
 		streams[host] = streamsResponse.Response
+
+		resp.Body.Close()
 	}
 
 	return streams, nil
